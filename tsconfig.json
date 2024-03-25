@@ -19,8 +19,9 @@
     ],
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "target": "ES2017"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/context/StateContext.js", "src/app/(root)/product/[slug]/page.jsx", "src/components/Cart.jsx", "src/components/Navbar.tsx"],
   "exclude": ["node_modules"]
 }

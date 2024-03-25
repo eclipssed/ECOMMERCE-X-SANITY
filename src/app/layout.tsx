@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import { StateContext } from "@/context/StateContext";
+import { Toaster } from "react-hot-toast";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -24,7 +26,10 @@ export default function RootLayout({
       <body
         className={` bg-gradient-to-br from-pink-100 to-green-100  ${poppins.className}`}
       >
-        {children}
+        <StateContext>
+          <Toaster />
+          {children}
+        </StateContext>
       </body>
     </html>
   );
