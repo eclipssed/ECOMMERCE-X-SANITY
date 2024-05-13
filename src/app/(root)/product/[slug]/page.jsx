@@ -83,12 +83,12 @@ const ProductDetails = ({ params }) => {
           <p className="price">${product?.price}</p>
           <div className="quantity">
             <h3>Quantity:</h3>
-            <p className="quantity-desc flex items-center">
-              <span className="minus" onClick={decQty}>
+            <p className="flex justify-between gap-2 items-center border border-slate-500">
+              <span className=" border-slate-500 border-r p-4" onClick={decQty}>
                 <AiOutlineMinus />
               </span>
-              <span className="num">{qty}</span>
-              <span className="plus" onClick={incQty}>
+              <span className="p-3">{qty}</span>
+              <span className="border-slate-500 border-l p-4" onClick={incQty}>
                 <AiOutlinePlus />
               </span>
             </p>

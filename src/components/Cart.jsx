@@ -8,6 +8,7 @@ import {
 } from "react-icons/ai";
 import { TiDeleteOutline } from "react-icons/ti";
 import toast from "react-hot-toast";
+import getStripe from '@/lib/getStripe.js'
 
 import { useStateContext } from "../context/StateContext";
 import { urlFor } from "@/lib/createClient";
@@ -36,12 +37,20 @@ const Cart = () => {
     });
 
     if (response.statusCode === 500) return;
+    
 
     const data = await response.json();
+    if(data.status === 200)
+    {
+      
+      toast.loading("Redirecting...");
+      stripe.redirectToCheckout({ sessionId: data.id });
+    }
+    else{
+      toast.error("something went wrong")
+    }
 
-    toast.loading("Redirecting...");
 
-    stripe.redirectToCheckout({ sessionId: data.id });
   };
 
   return (
@@ -87,21 +96,21 @@ const Cart = () => {
                     <h4>${item.price}</h4>
                   </div>
                   <div className="flex bottom">
-                    <div>
-                      <p className="quantity-desc flex items-center">
+                    <div >
+                      <p className="flex items-center border border-slate-500 max-w-32">
                         <span
-                          className="minus"
+                          className="border-slate-500 border-r p-3"
                           onClick={() =>
                             toggleCartItemQuanitity(item._id, "dec")
                           }
                         >
                           <AiOutlineMinus />
                         </span>
-                        <span className="num" onClick="">
+                        <span className="" onClick="">
                           {item.quantity}
                         </span>
                         <span
-                          className="plus"
+                          className="border-slate-500 border-l p-3"
                           onClick={() =>
                             toggleCartItemQuanitity(item._id, "inc")
                           }
@@ -110,13 +119,13 @@ const Cart = () => {
                         </span>
                       </p>
                     </div>
-                    <button
-                      type="button"
-                      className="remove-item"
-                      onClick={() => onRemove(item)}
-                    >
-                      <TiDeleteOutline />
-                    </button>
+                      <button
+                        type="button"
+                        className="remove-item"
+                        onClick={() => onRemove(item)}
+                      >
+                        <TiDeleteOutline />
+                      </button>
                   </div>
                 </div>
               </div>
